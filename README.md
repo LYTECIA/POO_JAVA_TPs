@@ -37,4 +37,5 @@ Java 21 · Eclipse IDE · Git · Linux
 ## 👩‍💻 Auteure
 
 Lytecia — L2 Informatique, Université de Rouen Normandie
-*Ingénieure logiciel en devenir — construire aujourd'hui les logiciels qui feront voler demain ✈️🚀*
+
+* Ingénieure logiciel en devenir — construire aujourd'hui les logiciels qui feront voler demain ✈️🚀 *
