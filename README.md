@@ -13,7 +13,6 @@ de développement (Javadoc, conventions de nommage, programmation par contrats).
 | TP | Sujet | Concepts abordés | Statut |
 |----|-------|-----------------|--------|
 | TP01 | Découverte Eclipse & Java | Syntaxe de base, méthodes | ✅ |
-> TP01 réalisé en salle de TP — code non retrouvé, sera revu lors du TP05.
 | TP02 | Chiffre de César | Classes, tableaux, encapsulation | 🔄 En cours |
 | TP03 | Calculette graphique | Interfaces | ⏳ |
 | TP04 | Dés et joueurs | Spécification, composition | ⏳ |
@@ -22,6 +21,8 @@ de développement (Javadoc, conventions de nommage, programmation par contrats).
 | TP07 | Morpion | Héritage, polymorphisme | ⏳ |
 | TP08 | PyLand 1 | Architecture multi-classes | ⏳ |
 | TP09 | PyLand 2 | Composition, héritage avancé | ⏳ |
+
+> **Note TP01 :** réalisé en salle de TP — code non retrouvé, sera revu lors du TP05.
 
 ## 🧠 Concepts du cours travaillés
 
