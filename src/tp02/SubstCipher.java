@@ -38,7 +38,7 @@ public class SubstCipher {
      *     getLastShiftedText().isEmpty() </pre>
      */
     public SubstCipher() {
-        ...
+        this(0);
     }
 
     /**
@@ -50,8 +50,16 @@ public class SubstCipher {
      *     getLastShiftedText().isEmpty() </pre>
      */
     public SubstCipher(int shift) {
-        ...
-    }
+    	
+        if(!(-ALPHABET_SIZE < shift && shift< ALPHABET_SIZE)) {
+          throw new AssertionError("shift doit etre compris entre -26 et 26");
+        }
+          this.shift = shift;
+          LastShiftedText ="";
+        }
+  
+    
+    	
 
     // REQUETES
 
@@ -60,14 +68,14 @@ public class SubstCipher {
      *  <code>getShift()</code>.
      */
     public String getLastShiftedText() {
-        ...
+        return LastShiftedText;
     }
 
     /**
      * Le décalage courant de l'encodeur.
      */
     public int getShift() {
-        ...
+        return shift;
     }
 
     // COMMANDES
@@ -81,7 +89,11 @@ public class SubstCipher {
      *     getLastShiftedText().isEmpty() </pre>
      */
     public void setShift(int shift) {
-        ...
+    	if(!(-ALPHABET_SIZE < shift && shift< ALPHABET_SIZE)) {
+            throw new AssertionError("shift doit etre compris entre -26 et 26");
+          }
+    	this.shift =shift;
+    	LastShiftedText = "";
     }
 
     /**
