@@ -119,15 +119,21 @@ public class SubstCipher {
         }
        StringBuilder s = new StringBuilder();
         
-        for( int i = text.length() -1;i<=0;i--) {
+        for( int i =0 ; i < text.length();i++) {
         	char c = text.charAt(i);
-        	if(isNonAccentedLetter(c)){
-        		s.append(c + shift);
+        	
+            if('a'<= c  && c <= 'z' ) {
+            	s.append((char)(((c -'a' + shift) % ALPHABET_SIZE)+'a'));	
         	}
-        	else {
-        		s.append(c);
+            else if('A'<= c  && c <= 'Z') {
+            	s.append((char)(((c -'A' + shift) % ALPHABET_SIZE)+'A'));	
+            }
+            else {
+            	s.append(c);
+            }
+        		
         	}
-        }
+        
         LastShiftedText = s.toString();
  
     }
@@ -139,7 +145,11 @@ public class SubstCipher {
      *     getLastShiftedText().isEmpty() </pre>
      */
     public void ensurePositiveShift() {
-        ...
+        if(shift<0){
+        	shift = -shift;
+        }
+        
+        
     }
 
     /**
@@ -149,7 +159,9 @@ public class SubstCipher {
      *     getLastShiftedText().isEmpty() </pre>
      */
     public void ensureNegativeShift() {
-        ...
+    	if(shift>0){
+        	shift = -shift;
+        }
     }
 
     // OUTILS
@@ -182,17 +194,5 @@ public class SubstCipher {
     public static int guessShiftFrom(String text) {
         ...
     }
-    // OUTILS
-    /* renvoie vrai si la lettre est accentué et faux sinon
-     *
-     * @post <pre>
-     *  Vrai ::= a <= c <= z || A <= c <= Z
-     *  faux ::= !(a <= c <= z || A <= c <= Z)
-     * </pre>
-     * 
-     *  
-     */
-    private boolean isNonAccentedLetter (char c) {
-    	return(('a'<= c  && c <= 'z' )|| ('A' <= c && c<= 'Z'));
-    }
+   
 }
