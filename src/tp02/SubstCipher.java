@@ -1,4 +1,5 @@
 package tp02;
+import java.util.*;
 
 /**
  * Un encodeur selon le principe du décalage circulaire (aussi appelé technique
@@ -192,7 +193,46 @@ public class SubstCipher {
      *                     % ALPHABET_SIZE </pre>
      */
     public static int guessShiftFrom(String text) {
-        ...
-    }
-   
+    	if(text == null) {
+        	throw new AssertionError("text doit etre une chaine de caractère valide");
+        }
+    	if(text.isEmpty()) {
+    		return 0;
+    	}
+		String textUpper=text.toUpperCase();
+    	int[] occurrences = new int[ALPHABET_SIZE];
+    	for(int i = 0;i<text.length();i++) {
+    		char c = textUpper.charAt(i);
+    		if('A'<= c  && c <= 'Z') {
+    		int position = c -'A';
+    		occurrences[position]++;	
+    		}
+    	}
+    	int max = occurrences[0];
+    	int most_frequent_char_intext_position = 0;
+    	for(int i=1; i < ALPHABET_SIZE;i++) {
+    		if(occurrences[i] > max) {
+    			max = occurrences[i];
+    			 most_frequent_char_intext_position=i;
+    		}
+    	}
+    	char most_frequent_char_intext= (char)( most_frequent_char_intext_position + 'A');
+    	
+    	
+    	return   ((most_frequent_char_intext- MOST_FREQUENT_CHAR) + ALPHABET_SIZE)% ALPHABET_SIZE;
+    	
+    	
+    	
+    }	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
 }
