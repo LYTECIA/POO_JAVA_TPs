@@ -1,5 +1,4 @@
 package tp02;
-import java.util.*;
 
 /**
  * Un encodeur selon le principe du décalage circulaire (aussi appelé technique
@@ -28,7 +27,7 @@ public class SubstCipher {
     // ATTRIBUTS D'INSTANCE
 
     private int shift;
-    private String LastShiftedText;
+    private String lastShiftedText;
 
     // CONSTRUCTEURS
 
@@ -56,7 +55,7 @@ public class SubstCipher {
           throw new AssertionError("shift doit etre compris entre -26 et 26");
         }
           this.shift = shift;
-          LastShiftedText ="";
+          lastShiftedText ="";
         }
   
     
@@ -69,7 +68,7 @@ public class SubstCipher {
      *  <code>getShift()</code>.
      */
     public String getLastShiftedText() {
-        return LastShiftedText;
+        return lastShiftedText;
     }
 
     /**
@@ -94,7 +93,7 @@ public class SubstCipher {
             throw new AssertionError("shift doit etre compris entre -26 et 26");
           }
     	this.shift =shift;
-    	LastShiftedText = "";
+    	lastShiftedText = "";
     }
 
     /**
@@ -124,10 +123,10 @@ public class SubstCipher {
         	char c = text.charAt(i);
         	
             if('a'<= c  && c <= 'z' ) {
-            	s.append((char)(((c -'a' + shift) % ALPHABET_SIZE)+'a'));	
+            	s.append((char)((((c - 'a' + shift) % ALPHABET_SIZE + ALPHABET_SIZE) % ALPHABET_SIZE)+'a'));	
         	}
             else if('A'<= c  && c <= 'Z') {
-            	s.append((char)(((c -'A' + shift) % ALPHABET_SIZE)+'A'));	
+            	s.append((char)((((c - 'A' + shift) % ALPHABET_SIZE + ALPHABET_SIZE) % ALPHABET_SIZE)+'A'));	
             }
             else {
             	s.append(c);
@@ -135,7 +134,7 @@ public class SubstCipher {
         		
         	}
         
-        LastShiftedText = s.toString();
+        lastShiftedText = s.toString();
  
     }
 
@@ -150,7 +149,7 @@ public class SubstCipher {
         	shift = -shift;
         }
         
-        
+        lastShiftedText = "";
     }
 
     /**
@@ -163,6 +162,7 @@ public class SubstCipher {
     	if(shift>0){
         	shift = -shift;
         }
+    	lastShiftedText = "";
     }
 
     // OUTILS
