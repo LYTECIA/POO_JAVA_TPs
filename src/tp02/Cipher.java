@@ -1,6 +1,6 @@
 package tp02;
 
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Un chiffreur/déchiffreur de messages.
@@ -41,8 +41,12 @@ import java.util.StringTokenizer;
 public class Cipher {
 
     // ATTRIBUTS D'INSTANCE
-
-    ...
+	
+     /** Le message courant en clair **/
+    private String clearText;
+    
+	/** Le message courant chiffré **/
+    private String cipherText ;
 
     // CONSTRUCTEURS
 
@@ -54,7 +58,8 @@ public class Cipher {
      *     getCipherText().isEmpty() </pre>
      */
     public Cipher() {
-        ...
+        cipherText ="";
+        clearText ="";
     }
 
     // REQUETES
@@ -64,7 +69,7 @@ public class Cipher {
      * Sa valeur correspond au message décodé de <code>getCipherText()</code>.
      */
     public String getClearText() {
-        ...
+        return clearText;
     }
 
     /**
@@ -72,7 +77,7 @@ public class Cipher {
      * Sa valeur correspond au message encodé de <code>getClearText()</code>.
      */
     public String getCipherText() {
-        ...
+        return cipherText;
     }
 
     // COMMANDES
@@ -85,7 +90,16 @@ public class Cipher {
      *     getClearText().equals(text) </pre>
      */
     public void setClearText(String text) {
-        ...
+    	 if (text == null) {
+    	        throw new AssertionError("text ne doit pas être null");
+    	    }
+    	    clearText = text;
+    	    Random g = new Random();
+    	    int shift = g.nextInt(26);
+    	    SubstCipher globalCipher = new SubstCipher(shift);
+    	    globalCipher.buildShiftedTextFor(text);
+    	    String firstPass = globalCipher.getLastShiftedText();
+    	    cipherText = shiftByWordLength(firstPass, 1);
     }
 
     /**
@@ -96,10 +110,37 @@ public class Cipher {
      *     getCipherText().equals(text) </pre>
      */
     public void setCipherText(String text) {
-        ...
+    	if (text == null) {
+            throw new AssertionError("text ne doit pas être null");
+        }
+        cipherText = text;
+        String firstPass = shiftByWordLength(text, -1);
+        int shift = SubstCipher.guessShiftFrom(firstPass);
+        SubstCipher globalCipher = new SubstCipher(-shift);
+        globalCipher.buildShiftedTextFor(firstPass);
+        clearText = globalCipher.getLastShiftedText();
     }
 
-    // OUTILS
-
-    ...
+ // OUTILS
+    /**
+     * Applique un décalage circulaire mot à mot.
+     * @param text le texte à traiter
+     * @param direction +1 pour chiffrer (droite), -1 pour déchiffrer (gauche)
+     */
+    private String shiftByWordLength(String text, int direction) {
+        StringBuilder result = new StringBuilder();
+        StringTokenizer tokens = new StringTokenizer(text, " ", true);
+        while (tokens.hasMoreTokens()) {
+            String token = tokens.nextToken();
+            if (token.equals(" ")) {
+                result.append(token);
+            } else {
+                int wordShift = token.length() * direction;
+                SubstCipher wordCipher = new SubstCipher(wordShift);
+                wordCipher.buildShiftedTextFor(token);
+                result.append(wordCipher.getLastShiftedText());
+            }
+        }
+        return result.toString();
+    }
 }
