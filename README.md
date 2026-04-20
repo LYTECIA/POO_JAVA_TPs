@@ -13,8 +13,8 @@ de développement (Javadoc, conventions de nommage, programmation par contrats).
 | TP | Sujet | Concepts abordés | Statut |
 |----|-------|-----------------|--------|
 | TP01 | Découverte Eclipse & Java | Syntaxe de base, méthodes | ✅ |
-| TP02 | Chiffre de César | Classes, tableaux, encapsulation | 🔄 En cours |
-| TP03 | Calculette graphique | Interfaces | ⏳ |
+| TP02 | Chiffre de César | Classes, tableaux, encapsulation |✅|
+| TP03 | Calculette graphique | Interfaces |  🔄 En cours  |
 | TP04 | Dés et joueurs | Spécification, composition | ⏳ |
 | TP05 | Tamagotchi | Plusieurs classes interagissantes | ⏳ |
 | TP06 | Gestion immobilière | Tri, comparaison d'objets | ⏳ |
