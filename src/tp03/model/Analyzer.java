@@ -63,10 +63,10 @@ class Analyzer implements IAnalyzer {
     public boolean isValidInput(String s) {
     	char[] digits = new char[] {'0','1','2','3','4','5','6','7','8','9'};
     	char[] operators = new char[] {'+','-','/','*','%'};
+    	Arrays.sort(digits);
+    	Arrays.sort(operators);
         for(int i = 0; i < s.length(); i++) {
         	char c = s.charAt(i);
-        	Arrays.sort(digits);
-        	Arrays.sort(operators);
         	int idx1 = Arrays.binarySearch(digits,c);
         	int idx2 = Arrays.binarySearch(operators,c);
         	if(!(idx1 >= 0) && !(idx2>=0) && (c != ' ')){
