@@ -2,20 +2,27 @@ package tp03.model;
 
 /**
  * @inv
- * arity() == 1
- * toString.equals("x")
- * value(x) == x
+ * arity() == 0
+ * value() == la valeur du nombre
+ * toString().equals("la valeur du nombre")
  */
 public class Number implements Token {
+	     // ATTRIBUTS
+         private final int val;
+         
+         // CONSTRUCTEUR
+         Number(int val) {
+             this.val = val;
+         }
 	
 	    @Override
 	    public int arity() {
-	        return 1 ;
+	        return 0;
 	    }
 	    
 	    @Override
 	    public String toString() {
-	        return " ";
+	        return String.valueOf(val);
 	    }
 	    
 	    @Override
@@ -24,6 +31,6 @@ public class Number implements Token {
 	            throw new AssertionError();
 	        }
 	        
-	        return operands[0] ;
+	        return val;
 	    }
 }
