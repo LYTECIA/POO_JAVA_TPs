@@ -1,5 +1,4 @@
 package tp03.model;
-import java.util.Arrays;
 class Analyzer implements IAnalyzer {
 
     // ATTRIBUTS D'INSTANCE
@@ -160,8 +159,72 @@ class Analyzer implements IAnalyzer {
      * FinSi
      */
     private Token getNext() {
-        ...
+        Token t = null;
+        int n = -1;         
+        boolean readingN = false;
+
+        while (t == null && index < input.length()) {
+            char c = input.charAt(index);
+            index++;
+
+            if (isDigit(c)) {
+                if (readingN) {
+                    n = n * 10;
+                } else {
+                    n = 0;
+                    readingN = true;
+                }
+                n = n + (c - '0');
+
+            } else if (isOperator(c)) {
+                if (readingN) {
+                    t = new Number(n);
+                    readingN = false;
+                    index--;         
+                } else {
+                    t = tokenForOperator(c);
+                }
+
+            } else if (c == ' ') {
+                if (readingN) {
+                    t = new Number(n);
+                    readingN = false;
+                }
+                skipSpaces();
+            }
+        }
+
+        if (readingN) {
+            t = new Number(n);
+        }
+
+        return t;
     }
-    
-    ...
+
+    // --- méthodes auxiliaires ---
+
+    private boolean isDigit(char c) {
+        return c >= '0' && c <= '9';
+    }
+
+    private boolean isOperator(char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/' || c == '%';
+    }
+
+    private void skipSpaces() {
+        while (index < input.length() && input.charAt(index) == ' ') {
+            index++;
+        }
+    }
+
+    private Token tokenForOperator(char c) {
+        switch (c) {
+            case '+': return new Plus();
+            case '-': return new Minus();
+            case '*': return new Mult();
+            case '/': return new Div();
+            case '%': return new Mod();
+            default:  throw new AssertionError("Opérateur inconnu : " + c);
+        }
+    }
 }
