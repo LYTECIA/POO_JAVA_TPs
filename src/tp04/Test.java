@@ -15,9 +15,35 @@ public final class Test {
      *  a gagné.
      */
     public static void game1(int n) {
-        /***************/
-        /* A COMPLETER */
-        /***************/
+        int[] a = new int[]{6};
+        int[] b = new int[]{7};
+
+        IPlayer[] players = new Player[]{new Player(a), new Player(b)};
+
+        int tour = 1;
+
+        while (n > 0) {
+
+            for (int i = 0; i < players.length; i++) {
+                players[i].playOnce();
+                players[i].addToScore();
+
+                System.out.println(
+                    tour + " Score de player[" + i + "] : " + players[i].score()
+                );
+            }
+
+            n--;
+            tour++;
+        }
+
+        if (players[0].score() > players[1].score()) {
+            System.out.println("Le joueur 0 a gagné avec un score de " + players[0].score());
+        } else if (players[1].score() > players[0].score()) {
+            System.out.println("Le joueur 1 a gagné avec un score de " + players[1].score());
+        } else {
+            System.out.println("Égalité !");
+        }
     }
 
     /**
@@ -30,10 +56,54 @@ public final class Test {
      * Notez bien que même si l'un des joueurs atteint ou dépasse le max,
      *  on finit le tour avant de regarder quels sont les heureux gagnants...
      */
+    
     public static void game2(int max) {
-        /***************/
-        /* A COMPLETER */
-        /***************/
+
+        IPlayer[] players = new Player[10];
+        for (int i = 0; i < players.length; i++) {
+            players[i] = new Player(new int[]{6});
+        }
+
+        boolean finished = false;
+        int tour = 1;
+
+        while (!finished) {
+
+            int maxScore = 0;
+
+            for (int i = 0; i < players.length; i++) {
+
+                players[i].playOnce();
+                players[i].addToScore();
+
+                System.out.println("Score " + tour + " de player[" + i + "] : " + players[i].score());
+
+                if (players[i].score() > maxScore) {
+                    maxScore = players[i].score();
+                }
+            }
+
+            if (maxScore >= max) {
+                finished = true;
+            }
+
+            tour++;
+        }
+
+        int bestScore = 0;
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].score() > bestScore) {
+                bestScore = players[i].score();
+            }
+        }
+
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].score() == bestScore) {
+                System.out.println("Score final de player[" + i + "] : " + players[i].score() + " gagnant !!!");
+            } else {
+                System.out.println("Score final de player[" + i + "] : " + players[i].score());
+            }
+        }
     }
 
     public static void main(String[] args) {
